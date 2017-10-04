@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Wishlist Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'wishlist/style.css' %}">
+    </head>
+    <body>
+        <h1>Hello, {{ user.username }}</h1>
+        <div class="container">
+            <nav>
+                <a href="/logout">Logout</a>
+            </nav>
+        </div>
+        <h3>Your Wish List:</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Item: </th>
+                <th>Added by: </th>
+                <th>Date Added: </th>
+                <th>Action: </th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for product in added_products %}
+                <tr>
+                    <td><p>{{ product.name }}<a href="products/{{ product.id }}"></a></p></td>
+                    <td>{{ prodcut.creator }}</td>
+                    <td>{{ product.created_at }}</td>
+                    <td><p>{{product}}<a href="product/remove/{{ product.id }}">Remove from my Wishlist</a><a href="product/delete/{{ product.id}}">Delete</a></p></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Other User's Wish List</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Item   </th>
+                <th>Added by   </th>
+                <th>Date Added   </th>
+                <th>Action   </th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for product in not_been_added %}
+                <tr>
+                    <td>p>{{ product.name }}<a href="products/{{ product.id }}"></a></p></td>
+                    <td>{{ prodcut.creator }}</td>
+                    <td>{{ product.created_at }}</td>
+                    <td><p>{{product}}<a href="/product/add/{{ product.id }}"> Add to my Wishlist</a></p></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="container">
+            <nav>
+                <a href="/create">Add Item</a>
+            </nav>
+        </div>
+    </body>
+</html>
